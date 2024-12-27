@@ -1,102 +1,50 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import './Service.css'; // นำเข้าไฟล์ CSS
 
-const Services = () => {
-  const [hoveredIndex, setHoveredIndex] = useState(null); // ใช้ state ในการจัดการ hover
+function Service() {
+  const [isVisible, setIsVisible] = useState(false);
 
-  const services = [
-    { icon: '🎨', text: 'Graphic Design & Video Editing (กราฟิกตัดต่อ)' },
-    { icon: '💻', text: 'Computer Assembly & Maintenance (ช่างประกอบและบำรุงรักษาคอมพิวเตอร์)' },
-    { icon: '🌐', text: 'Networking & IT Infrastructure (เน็ตเวิร์กและโครงสร้างพื้นฐานไอที)' },
-    { icon: '💾', text: 'Programming & Software Development (การเขียนโปรแกรมและพัฒนาซอฟต์แวร์)' },
-    { icon: '📈', text: 'Digital Marketing (การตลาดดิจิทัล)' },
-  ];
+  useEffect(() => {
+    // ตั้งค่าให้เนื้อหาปรากฏหลังจากโหลดหน้า
+    setTimeout(() => setIsVisible(true), 100); // เพิ่ม delay เล็กน้อย
+  }, []);
 
   return (
-    <div style={styles.container}>
-      <h1 style={styles.header}>LannaPoly Vocational Courses</h1>
-      <h2 style={styles.subHeader}>Vocational Education Programs (ปวช & ปวส)</h2>
-      <ul style={styles.list}>
-        {services.map((service, index) => (
-          <li
-            key={index}
-            className="service-item"
-            style={{
-              ...styles.listItem,
-              ...(hoveredIndex === index ? styles.hoveredItem : {}),
-            }}
-            onMouseEnter={() => setHoveredIndex(index)}
-            onMouseLeave={() => setHoveredIndex(null)}
-          >
-            <span style={styles.icon}>{service.icon}</span> {service.text}
-          </li>
-        ))}
-      </ul>
+    <div className={`service-page ${isVisible ? 'fade-in' : ''}`}>
+      <h1>บริการแผนกไอที</h1>
+      <p>ยินดีต้อนรับสู่แผนกไอที เราเปิดสอนหลากหลายหลักสูตรสำหรับนักศึกษา ปวช. และ ปวส.</p>
+
+      <section>
+        <h2>หลักสูตรสำหรับระดับ ปวช.</h2>
+        <ul>
+          <li>พื้นฐานการเขียนโปรแกรม (Basic Programming)</li>
+          <li>การออกแบบกราฟิก (Graphic Design)</li>
+          <li>พื้นฐานเครือข่ายคอมพิวเตอร์ (Basic Networking)</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>หลักสูตรสำหรับระดับ ปวส.</h2>
+        <ul>
+          <li>การพัฒนาเว็บและแอปพลิเคชัน (Web & Application Development)</li>
+          <li>การออกแบบและสร้างกราฟิกขั้นสูง (Advanced Graphic Design)</li>
+          <li>การจัดการเครือข่ายและความปลอดภัย (Network Management & Security)</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>รายละเอียดหลักสูตร</h2>
+        <h3>การเขียนโค้ด (Coding)</h3>
+        <p>เรียนรู้การเขียนโค้ดด้วยภาษาโปรแกรมยอดนิยม เช่น Python, JavaScript และ C++</p>
+
+        <h3>การออกแบบกราฟิก (Graphic Design)</h3>
+        <p>สร้างสรรค์ผลงานด้วยโปรแกรม Adobe Photoshop, Illustrator และ Canva</p>
+
+        <h3>การจัดการเครือข่าย (Networking)</h3>
+        <p>ศึกษาการตั้งค่าและจัดการระบบเครือข่าย รวมถึงการแก้ไขปัญหาด้านเครือข่าย</p>
+      </section>
     </div>
   );
-};
+}
 
-// Styles
-const styles = {
-  container: {
-    padding: '40px',
-    background: 'linear-gradient(135deg, #ffffff, #e9f2ff)',
-    borderRadius: '15px',
-    boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
-    margin: '20px',
-    maxWidth: '800px',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    animation: 'fadeIn 1s ease-out',
-  },
-  header: {
-    fontSize: '3rem',
-    color: '#003366',
-    textAlign: 'center',
-    marginBottom: '15px',
-    fontWeight: 'bold',
-    borderBottom: '4px solid #0056b3',
-    display: 'inline-block',
-    paddingBottom: '10px',
-  },
-  subHeader: {
-    fontSize: '1.8rem',
-    color: '#003366',
-    textAlign: 'center',
-    marginBottom: '30px',
-    fontWeight: '500',
-    animation: 'slideIn 1s ease-out',
-  },
-  list: {
-    fontSize: '1.2rem',
-    color: '#444444',
-    lineHeight: '1.8',
-    listStyleType: 'none',
-    paddingLeft: '0',
-    marginTop: '20px',
-  },
-  listItem: {
-    backgroundColor: '#f9f9f9',
-    padding: '15px',
-    borderRadius: '10px',
-    marginBottom: '20px',
-    position: 'relative',
-    boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
-    transition: 'transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease',
-    cursor: 'pointer',
-    transform: 'scale(1)',
-    animation: 'scaleIn 0.5s ease-out',
-  },
-  hoveredItem: {
-    transform: 'translateY(-10px)',
-    boxShadow: '0 8px 25px rgba(0, 0, 0, 0.2)',
-    backgroundColor: '#e9f2ff',
-    color: '#003366',
-  },
-  icon: {
-    fontSize: '1.5rem',
-    marginRight: '10px',
-    color: '#0056b3',
-  },
-};
-
-export default Services;
+export default Service;
